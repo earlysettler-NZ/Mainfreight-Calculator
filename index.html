@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mainfreight Rate Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="calculator">
+      <div class="panel input-panel">
+        <div class="panel-heading">
+          <p class="eyebrow">Mainfreight to Home</p>
+          <h1>Freight rate calculator</h1>
+          <p class="subcopy">Rates effective from 01 Apr 2026. Base freight excludes FAF and GST.</p>
+        </div>
+
+        <div class="field-grid">
+          <label>
+            <span>Origin</span>
+            <select id="origin"></select>
+          </label>
+
+          <label>
+            <span>Destination</span>
+            <select id="destination"></select>
+          </label>
+
+          <label>
+            <span>Dimension unit</span>
+            <select id="unit">
+              <option value="mm">Millimetres</option>
+              <option value="cm">Centimetres</option>
+              <option value="m">Metres</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Length</span>
+            <input id="length" type="number" min="0" step="1" inputmode="decimal" placeholder="0">
+          </label>
+
+          <label>
+            <span>Width</span>
+            <input id="width" type="number" min="0" step="1" inputmode="decimal" placeholder="0">
+          </label>
+
+          <label>
+            <span>Height</span>
+            <input id="height" type="number" min="0" step="1" inputmode="decimal" placeholder="0">
+          </label>
+
+          <label>
+            <span>Weight (kg)</span>
+            <input id="weight" type="number" min="0" step="0.1" inputmode="decimal" placeholder="0">
+          </label>
+
+          <label>
+            <span>FAF %</span>
+            <input id="faf" type="number" min="0" step="0.01" inputmode="decimal" value="0">
+          </label>
+
+          <label class="toggle-row">
+            <input id="gst" type="checkbox">
+            <span>Add GST (15%)</span>
+          </label>
+        </div>
+      </div>
+
+      <aside class="panel result-panel" aria-live="polite">
+        <div>
+          <p class="eyebrow">Estimated cost</p>
+          <div id="total" class="total">$0.00</div>
+          <p id="route" class="route">Choose an origin and destination.</p>
+        </div>
+
+        <dl class="breakdown">
+          <div>
+            <dt>Actual cubic</dt>
+            <dd id="actualM3">0.000 m3</dd>
+          </div>
+          <div>
+            <dt>Weight cubic</dt>
+            <dd id="weightM3">0.000 m3</dd>
+          </div>
+          <div>
+            <dt>Chargeable cubic</dt>
+            <dd id="chargeM3">0.000 m3</dd>
+          </div>
+          <div>
+            <dt>Base charge</dt>
+            <dd id="baseCharge">$0.00</dd>
+          </div>
+          <div>
+            <dt>Per m3 rate</dt>
+            <dd id="m3Rate">$0.00</dd>
+          </div>
+          <div>
+            <dt>Freight ex FAF/GST</dt>
+            <dd id="freight">$0.00</dd>
+          </div>
+          <div>
+            <dt>FAF</dt>
+            <dd id="fafAmount">$0.00</dd>
+          </div>
+          <div>
+            <dt>GST</dt>
+            <dd id="gstAmount">$0.00</dd>
+          </div>
+        </dl>
+      </aside>
+    </section>
+
+    <section class="rates-panel">
+      <div class="table-head">
+        <h2>Loaded rate card</h2>
+        <input id="filter" type="search" placeholder="Filter destinations">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Destination</th>
+              <th>Areas</th>
+              <th>Factor</th>
+              <th>Base</th>
+              <th>Per m3</th>
+            </tr>
+          </thead>
+          <tbody id="rateRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
